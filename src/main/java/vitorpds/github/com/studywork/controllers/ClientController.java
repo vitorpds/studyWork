@@ -5,18 +5,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vitorpds.github.com.studywork.entities.Client;
-import vitorpds.github.com.studywork.repositories.ClientRepository;
+import vitorpds.github.com.studywork.dto.ClientDTO;
+import vitorpds.github.com.studywork.service.ClientService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientController {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @PostMapping
-    public Client saveClient(@RequestBody Client client) {
-        return clientRepository.save(client);
+    public ClientDTO saveClient(@Valid @RequestBody ClientDTO clientdto) {
+        return clientService.save(clientdto);
     }
 }
 
